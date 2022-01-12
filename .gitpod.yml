@@ -1,6 +1,12 @@
 tasks:
-  - init: mkdir -p /workspace/data
+  - name: rabbitmq
+    init: mkdir -p /workspace/data
     command: docker-compose up
+  - name: MockServer
+    init: npm i
+    command: node mock-server.js
 ports:
   - port: 5672
+    onOpen: ignore
+  - port: 1080
     onOpen: ignore
