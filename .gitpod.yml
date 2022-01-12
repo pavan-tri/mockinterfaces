@@ -1,0 +1,5 @@
+tasks:
+  - init: mkdir -p /workspace/data
+ports:
+  - port: 5672
+    onOpen: ignore
