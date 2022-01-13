@@ -12,11 +12,19 @@ tasks:
   - name: MockServer
     init: npm i
     command: node mock-server.js
+  
 ports:
-  - port: 5672 # Rabbit
-  - port: 1080 # Mock-server
-  - port: 4566 # local-stack
-  - port: 4571 # local-stack
-  - port: 3306 # mysql
-  - port: 6379 # redis
+  - port: 5672 
+  - port: 1080 
+  - port: 4566 
+  - port: 4571 
+  - port: 3306 
+  - port: 6379 
     onOpen: ignore
+
+vscode:
+  extensions:
+    - golang.Go
+    - cweijan.vscode-mysql-client2
+    - humao.rest-client
+    - 42crunch.vscode-openapi
