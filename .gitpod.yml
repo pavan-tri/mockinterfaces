@@ -3,7 +3,12 @@ image:
 tasks:
   - name: rabbitmq
     init: mkdir -p /workspace/data
-    command: docker-compose up
+    command: docker-compose -f docker-compose-rabbit.yaml up
+  - name: localstack
+    init: mkdir -p /workspace/data
+    command: docker-compose -f docker-compose-localstack.yaml up
+  - name: redis
+    command: redis-server
   - name: MockServer
     init: npm i
     command: node mock-server.js

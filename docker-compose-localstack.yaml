@@ -1,12 +1,5 @@
 version: "3"
 services:
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - "rabbitmq_data:/workspace/data"
   localstack:
     container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
     image: localstack/localstack
@@ -24,12 +17,9 @@ services:
       - "${TMP_DIR:-/workspace/data}:${TMP_DIR:-/tmp/localstack}" # used for LocalStack internal data
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - profile-network
+      - localstack-network
 
 networks:
-  profile-network:
-    name: profile-network
+  localstack-network:
+    name: localstack-network
     driver: bridge
-
-volumes:
-  rabbitmq_data:
