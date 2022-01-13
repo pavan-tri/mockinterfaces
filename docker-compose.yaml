@@ -1,11 +1,36 @@
 version: "3"
 services:
- rabbitmq:
-  image: "rabbitmq:3-management"
-  ports:
-    - "5672:5672"
-    - "15672:15672"
-  volumes:
-    - "rabbitmq_data:/workspace/data"
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - "rabbitmq_data:/workspace/data"
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack
+    ports:
+      - '4566:4566'
+      - '4571:4571'
+    environment:
+      - SERVICES=${SERVICES-dynamodb,dynamodbstreams,s3,s3api,secretsmanager,ses,sns,sqs }
+      - DEBUG="1"
+      - DATA_DIR=${DATA_DIR-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
+      - DOCKER_HOST=unix:///var/run/docker.sock
+
+    volumes:
+      - "${TMP_DIR:-/tmp/localstack}:${TMP_DIR:-/tmp/localstack}" # used for LocalStack internal data
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - profile-network
+
+networks:
+  profile-network:
+    name: profile-network
+    driver: bridge
+
 volumes:
   rabbitmq_data:
