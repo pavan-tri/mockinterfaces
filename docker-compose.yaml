@@ -16,13 +16,12 @@ services:
     environment:
       - SERVICES=${SERVICES-dynamodb,dynamodbstreams,s3,s3api,secretsmanager,ses,sns,sqs }
       - DEBUG="1"
-      - DATA_DIR=${DATA_DIR-}
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - DATA_DIR=${DATA_DIR-/tmp/localstack/data}
       - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
       - DOCKER_HOST=unix:///var/run/docker.sock
 
     volumes:
-      - "${TMP_DIR:-/tmp/localstack}:${TMP_DIR:-/tmp/localstack}" # used for LocalStack internal data
+      - "${TMP_DIR:-/workspace/data}:${TMP_DIR:-/tmp/localstack}" # used for LocalStack internal data
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - profile-network
