@@ -12,13 +12,21 @@ tasks:
   - name: MockServer
     init: npm i
     command: node mock-server.js
+  - name: ExampleFlow
+    init: npm i
+    command: echo "Sleep 10s";sleep 10; ./lambdatest.sh
   
 ports:
   - port: 5672 
+    onOpen: ignore
   - port: 1080 
+    onOpen: ignore
   - port: 4566 
+    onOpen: ignore
   - port: 4571 
+    onOpen: ignore
   - port: 3306 
+    onOpen: ignore
   - port: 6379 
     onOpen: ignore
 
@@ -33,4 +41,3 @@ vscode:
     - golang.Go
     - cweijan.vscode-mysql-client2
     - humao.rest-client
-    - 42crunch.vscode-openapi

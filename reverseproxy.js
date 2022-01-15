@@ -4,7 +4,7 @@ mockServerClient("localhost", HTTP_PORT)
             .mockAnyResponse({
                 "httpRequest": {
                     "headers": {
-                        "Host": ["service-ext1.mydomain.com"]
+                        "Host": ["service-ext1.mydomain.com:"+ HTTP_PORT]
                     },
                     "path": "/.*"
                 },
@@ -24,7 +24,7 @@ mockServerClient("localhost", HTTP_PORT)
                         .mockAnyResponse({
                             "httpRequest": {
                                 "headers": {
-                                    "Host": ["staging.lambda.mydomain.com"]
+                                    "Host": ["staging.lambda.mydomain.com:"+ HTTP_PORT]
                                 },
                                 "path": "/.*"
                             },

@@ -71,12 +71,10 @@ awslocal apigateway create-deployment \
 [ $? == 0 ] || fail 6 "Failed: AWS / apigateway / create-deployment"
 
 ENDPOINT=http://localhost:4566/restapis/${API_ID}/${STAGE}/_user_request_/HowMuchIsTheFish
-
 echo "API available at: ${ENDPOINT}"
-PROXY_ENDPOINT = http://${STAGE}.api.mydomain.com/HowMuchIsTheFish
-
-#Update caddy to dyanamically set the upstream PROXY_ENDPOINT for this route to the ENDPOINT
-
+PROXY_ENDPOINT=http://staging.lambda.mydomain.com:1080/restapis/${API_ID}/${STAGE}/_user_request_/HowMuchIsTheFish
+node reverseproxy.js
+echo "Reverproxy setup ; API available at: ${PROXY_ENDPOINT}"
 
 echo "Testing GET:"
 curl -i ${ENDPOINT}
