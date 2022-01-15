@@ -15,3 +15,8 @@ $ gp preview $(gp url 1080)/mockserver/dashboard
 https://onexlab-io.medium.com/localstack-dynamodb-8befdaac802b
 Example usage for Dynamodb
 Tested for persistance across workspaces, it works
+
+Lamdba example works with local mode. zip the lambda.js into api-handler.zip
+zip api-handler.zip lambda.js 
+Run  
+./lambdatest.sh 

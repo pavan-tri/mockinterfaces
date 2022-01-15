@@ -7,9 +7,10 @@ services:
       - '4566:4566'
       - '4571:4571'
     environment:
-      - SERVICES=${SERVICES-dynamodb,dynamodbstreams,s3,s3api,secretsmanager,ses,sns,sqs }
-      - DEBUG="1"
+      - SERVICES=${SERVICES-lambda,apigateway,dynamodb,dynamodbstreams,s3,s3api,secretsmanager,ses,sns,sqs }
+      - DEBUG=1
       - DATA_DIR=${DATA_DIR-/tmp/localstack/data}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-local }
       - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
       - DOCKER_HOST=unix:///var/run/docker.sock
 
