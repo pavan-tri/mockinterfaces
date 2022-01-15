@@ -22,6 +22,12 @@ ports:
   - port: 6379 
     onOpen: ignore
 
+hosts:
+  staging.lambda.mydomain.com : 127.0.0.1
+  production.lambda.mydomain.com : 127.0.0.1
+  service-ext1.mydomain.com : 127.0.0.1
+  service-ext2.mydomain.com : 127.0.0.1
+  
 vscode:
   extensions:
     - golang.Go

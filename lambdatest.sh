@@ -1,7 +1,7 @@
 
 API_NAME=api
 REGION=us-east-1
-STAGE=test
+STAGE=staging
 
 function fail() {
     echo $2
@@ -73,9 +73,13 @@ awslocal apigateway create-deployment \
 ENDPOINT=http://localhost:4566/restapis/${API_ID}/${STAGE}/_user_request_/HowMuchIsTheFish
 
 echo "API available at: ${ENDPOINT}"
+PROXY_ENDPOINT = http://${STAGE}.api.mydomain.com/HowMuchIsTheFish
+
+#Update caddy to dyanamically set the upstream PROXY_ENDPOINT for this route to the ENDPOINT
+
 
 echo "Testing GET:"
 curl -i ${ENDPOINT}
 
-echo "Testing POST:"
-curl -iX POST ${ENDPOINT}
+echo "Testing GET via proxy name:"
+curl -i ${PROXY_ENDPOINT}
