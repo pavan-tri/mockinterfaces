@@ -21,6 +21,7 @@ ports:
     onOpen: ignore
   - port: 1080 
     onOpen: ignore
+    visibility: public
   - port: 4566 
     onOpen: ignore
   - port: 4571 
